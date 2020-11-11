@@ -1,0 +1,33 @@
+
+let dieMap=new Map();
+dieMap.set(1,0);
+dieMap.set(2,0);
+dieMap.set(3,0);
+dieMap.set(4,0);
+dieMap.set(5,0);
+dieMap.set(6,0);
+while(true)
+{
+    let rollNumber=Math.floor((Math.random()*6)+1);
+    let val=dieMap.get(rollNumber);
+    if(val<10)
+    dieMap.set(rollNumber,val+1);
+    else
+    break;
+}
+
+for(let[key,value] of dieMap){
+    if(value==10){
+        console.log("Maximum times occurence of "+key);
+        break;
+    }
+}
+let min=Number.POSITIVE_INFINITY;
+let minKey=0;
+for(let[key,value] of dieMap){
+    if(value<min){
+        min=value;
+        minKey=key;
+    }
+}
+console.log("Minimum occurences: "+minKey);
