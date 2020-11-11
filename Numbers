@@ -1,0 +1,113 @@
+{
+    let numberArr=new Array();
+    for(let i=0;i<10;i++)
+    {
+        let num=Math.floor((Math.random()*900)+100);
+        numberArr.push(num);
+    }
+    max=Number.NEGATIVE_INFINITY;
+    min=Number.POSITIVE_INFINITY;
+    function findMax(a,b){
+        return a>b?a:b;
+    }
+    function findMin(a,b){
+        return a<b?a:b;
+    }
+    console.log(numberArr);
+    for(let i=0;i<10;i++){
+        max=findMax(max,numberArr[i]);
+        min=findMin(min,numberArr[i]);
+    }
+    let secondLargest=Number.NEGATIVE_INFINITY;
+    let secondSmallest=Number.POSITIVE_INFINITY;
+    for(let i=0;i<10;i++){
+        if(numberArr[i]!=max){
+            secondLargest=findMax(secondLargest,numberArr[i]);
+        }
+        if(numberArr[i]!=min){
+            secondSmallest=findMin(secondSmallest,numberArr[i]);
+        }
+    }
+    console.log("second largest "+secondLargest);
+    console.log("second smallest "+secondSmallest);
+    numberArr.sort(function(a,b){return b-a;});
+    console.log("second largest "+numberArr[1]+" second smallest "+numberArr[8]);
+}
+//store prime factors
+{
+    const prompt = require('prompt-sync')();
+    let number = parseInt(prompt("Enter a number "));
+    let primeArr=new Array();
+    for(let i=2;i<(number/2);i++){
+        if(number%i==0){
+            if(findPrime(i))
+            primeArr.push(i);
+        }
+    }
+    function findPrime(num){
+        let c=0;
+        if(num==2) return true;
+        else{
+            for(let i=2;i<=num/2;i++)
+            {
+                if(num%i==0)
+                c++;
+            }
+            if(c==0)
+            return true;
+            else
+            return false;
+        }
+    }
+    if(primeArr.length==0)
+    console.log("no prime factors");
+    else
+    console.log("prime factors "+primeArr);
+}
+//sum of 3 integers is 0
+{
+    let array=new Array(1,2,0,-2,1);
+    findTriplets(array,array.length);
+    function findTriplets(arr,n){
+        var found=false;
+        arr.sort(function(a,b){return a-b;});
+        for(let i=0;i<n;i++)
+        {
+            let l = i + 1; 
+        let r = n - 1; 
+        let x = arr[i]; 
+        while (l < r) 
+        { 
+            if (x + arr[l] + arr[r] == 0) { 
+                    
+                console.log(x + " "); 
+                    console.log(arr[l]+ " "); 
+                    console.log(arr[r]+ " "); 
+                    console.log("---------------")
+      
+                l++; 
+                r--; 
+                found = true; 
+            } 
+            else if (x + arr[l] + arr[r] < 0) 
+                l++; 
+
+            else
+                r--; 
+        } 
+
+        }
+        if (found == false) 
+            console.log("No triplets");
+    }
+}
+//finding repeating numbers
+{
+    let numArr=new Array();
+    for(let i=10;i<100;i++)
+    {
+        if(i%11==0)
+        numArr.push(i);
+    }
+    console.log(numArr);
+}
