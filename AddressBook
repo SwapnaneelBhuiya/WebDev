@@ -1,0 +1,214 @@
+{
+    class Contact
+{
+    Constructor(...param)
+    {
+        this.firstName=param[0];
+        this.lastName=param[1];
+        this.address=param[2];
+        this.city=param[3];
+        this.state=param[4];
+        this.zip=param[5];
+        this.number=param[6];
+        this.email=param[7];
+    }
+    get lastName(){return this.lastName;}
+    set lastName(name){
+        if(name.matches("^[A-Z]{1}[a-z]{3,}$"))
+        this.lastName=name;
+        else
+        throw 'Incorrect last name';
+    }
+    get firstName(){return this.firstName;}
+    set firstName(name){
+        if(name.matches("^[A-Z]{1}[a-z]{3,}$"))
+        this.firstName=name;
+        else 
+        throw 'Incorrect first name';
+    }
+    get address(){return this.address;}
+    set address(address){
+        if(address.matches("[A-Za-z0-9]{4,}"))
+        this.address=address;
+        else
+        throw 'Incorrect address';
+    }
+    get city(){return this.city;}
+    set city(city){
+        if(city.matches("^[A-Z]{1}//s[a-z]{4,}"))
+        this.city=city;
+        else
+        throw 'Incorrect city';
+    }
+    get state(){return this.state;}
+    set state(state){
+        if(state.matches("^[A-Z]{1}//s[a-z]{4,}"))
+        this.state=state;
+        else
+        throw 'Incorrect state';
+    }
+    get zip(){return this.zip;}
+    set zip(zip){
+        if(zip.matches("^[1-9]{1}[0-9]{5}"))
+        this.zip=zip;
+        else
+        throw 'Incorrect zip';
+    }
+    get number(){return this.number;}
+    set number(number){
+        if(number.matches("^[0-9]{2}\\s{1}[1-9]{1}[0-9]{9}"))
+        this.number=number;
+        else
+        throw 'Incorrect number';
+    }
+    get email(){return this.email;}
+    set email(email){
+        if(email.matches("^(abc)[_+.-]{0,1}[a-zA-Z]*[@]{1}(bridgelabz|gmail|yahoo|abc)[.]{1}(co|com|net)[.]{0,1}[a-z]{0,2}"))
+        this.email=email;
+        else 
+        throw 'Incorrect email';
+    }
+    toString() {
+        return '\nFirstName: ' + this.firstName + ' LastName: ' + this.lastName + ' Address: ' + this.address + ' City: ' + this.city + ' State : ' + this.state + ' Zip: ' + this.zip + ' Number: ' + this.number + 'Email: ' + this.email;
+    }
+}
+}
+let contact1=new Contact("Swapna","Bhuiya","Jadavpur","Kolkata","West Bengal",700032,"91 9831081744","abc@gmail.com");
+let contact2=new Contact("Sandi","Chakra","Asansol","Chittara","West Bengal",890980,"90 9831087654","foa@gmail.com");
+let contact3 = new Contact("Sayak", "Mondal", "Hazra", "Kolkata", "WBengal", 700067, '91 7989930469', 'def@yahoo.com');
+let addressBook=new Array();
+addElement(addressBook,contact1);
+addElement(addressBook,contact2);
+addElement(addressBook,contact3);
+function updateContact(arr,name,newname){
+    arr.filter(contact=>contact.firstName.equals(name)).forEach(contact => contact.firstName=newname);
+}
+function findAndDelete(arr,name){
+    let removeIndex=arr.indexOf(name);
+    arr.splice(removeIndex,1);
+}
+function addElement(arr,contact){
+    for(contacts in arr){
+        if(contacts.firstName.equals(contatc.firstName))
+        throw 'Name already exists';
+    }
+    arr.push(contact);
+}
+function findCountOfContacts(arr){
+    let count=arr.reduce((acc, curVal) => acc.concat(curVal), []).length;
+    console.log("Number of count "+count);
+}
+function searchByCity(arr, city, name)
+{
+    let temp=arr.filter(contact=>contact.city==city).find(contact=>contact.firstName==name);
+    if(temp!='undefined')
+    console.log(temp.toString());
+    else
+    console.log("Person not found");
+}
+function searchByState(arr, state, name)
+{
+    let temp=arr.filter(contact=>contact.state==state).find(contact=>contact.firstName==name);
+    if(temp!='undefined')
+    console.log(temp.toString());
+    else
+    console.log("Person not found");
+}
+function viewByState(arr,state){
+    arr.filter(contact=>contact.state==state).forEach(contact=>console.log(contact.toString()));
+}
+function viewByCity(arr,city){
+    arr.filter(contact=>contact.city==city).forEach(contact=>console.log(contact.toString()));
+}
+function getCountByCity(contactArray, cityName) {
+    let count = contactArray.filter(contact => contact.city == cityName).reduce((acc, curVal) => acc.concat(curVal), []).length;
+    console.log("Number of contacts living in this city are: " + count);
+}
+//Function to get count of persons by state
+function getCountByState(contactArray, stateName) {
+    let count = contactArray.filter(contact => contact.state == stateName).reduce((acc, curVal) => acc.concat(curVal), []).length;
+    console.log("Number of contacts living in this state are: " + count);
+}
+//Function to sort on the basis of names,city,state or zip
+function sortedContacts(contactArray, type) {
+    if (type == "Name") {
+        contactArray.sort(function (a, b) {
+            var nameA = a.firstName.toLowerCase(), nameB = b.firstName.toLowerCase()
+            if (nameA < nameB)
+                return -1
+            if (nameA > nameB)
+                return 1
+            return 0
+        });
+        contactArray.forEach(emp => console.log(emp.toString()));
+    }
+    else if (type == "City") {
+        contactArray.sort(function (a, b) {
+            var nameA = a.city.toLowerCase(), nameB = b.city.toLowerCase()
+            if (nameA < nameB)
+                return -1
+            if (nameA > nameB)
+                return 1
+            return 0
+        });
+        contactArray.forEach(emp => console.log(emp.toString()));
+    }
+    else if (type == "State") {
+        contactArray.sort(function (a, b) {
+            var nameA = a.state.toLowerCase(), nameB = b.state.toLowerCase()
+            if (nameA < nameB)
+                return -1
+            if (nameA > nameB)
+                return 1
+            return 0
+        });
+        contactArray.forEach(emp => console.log(emp.toString()));
+    }
+    else {
+        contactArray.sort(function (a, b) { return a.zip - b.zip });
+        contactArray.forEach(emp => console.log(emp.toString()));
+    }
+}
+console.log("------Initial AddressBook Array---------");
+    addressBook.forEach(contact => console.log(contact.toString()));
+    updateContact(addressBook, "Swapna", "Swapnaneel");
+    console.log("                   ");
+    console.log("------After Updating---------");
+    addressBook.forEach(contact => console.log(contact.toString()));
+    findAndDelete(addressBook, "Arka");
+    console.log("                   ");
+    console.log("------After Deleting ---------");
+    addressBook.forEach(contact => console.log(contact.toString()));
+    console.log("                   ");
+    console.log("----Getting the count---------");
+    countContacts(addressBook);
+    console.log("                   ");
+    console.log("----Getting contacts by city name---------");
+    viewByCity(addressBook, "Kolkata");
+    console.log("                   ");
+    console.log("----Getting contacts by state name---------");
+    viewByState(addressBook, "Maharashthra");
+    console.log("                   ");
+    console.log("----Searching contacts in a state---------");
+    searchByState(addressBook, "Sayak", "MWBengal");
+    console.log("                   ");
+    console.log("----Searching contacts in a city---------");
+    searchByCity(addressBook, "Sayak", "Kolkata");
+    console.log("                   ");
+    console.log("----Number of contacts in a city---------");
+    getCountByCity(addressBook, "Kolkata");
+    console.log("                   ");
+    console.log("----Number of contacts in a state---------");
+    getCountByState(addressBook, "Maharashthra");
+    console.log("                   ");
+    console.log("----Contacts sorted on the basis of name---------");
+    sortedContacts(addressBook, "Name");
+    console.log("                   ");
+    console.log("----Contacts sorted on the basis of city---------");
+    sortedContacts(addressBook, "City");
+    console.log("                   ");
+    console.log("----Contacts sorted on the basis of state---------");
+    sortedContacts(addressBook, "State");
+    console.log("                   ");
+    console.log("----Contacts sorted on the basis of zip---------");
+    sortedContacts(addressBook, "Zip");
