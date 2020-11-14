@@ -112,6 +112,77 @@ function totalDaysWorked(numOfDays, dailyWage){
 }
 console.log("UC7G number of days emp worked"+empDailyWageArr.reduce(totalDaysWorked,0));
 
+console.log("Employee Wage with reduce: "+empWageArray.reduce(totalWages,0));
+//map daily wage with day
+let day=0;
+function mapDayWithWage(dailyWage){
+    day++;
+    return day+"="+dailyWage;
+}
+let mapDayWithWages=empWageArray.map(mapDayWithWage);
+console.log("Map b/w days and wages");
+console.log(mapDayWithWages);
+//Checks if it contains 160
+function fullTimeWage(dailyWage){
+    return dailyWage.includes("160");
+}
+function partTimeWage(dailyWage){
+    return dailyWage.includes("80");
+}
+
+function totalWorkingDays(numOfDays,dailywage){
+    if(dailywage>0){
+        return numOfDays+1;
+    }
+    return numOfDays;
+}
+let fullDayWage=mapDayWithWages.filter(fullTimeWage);
+console.log("------------------");
+console.log("Daily Wage filter when full wage is obtained");
+console.log(fullDayWage);
+console.log("------------------");
+console.log("First day when full wage is obtained");
+console.log(mapDayWithWages.find(fullTimeWage));
+console.log("------------------");
+console.log("Check All element have full time wage");
+console.log(fullDayWage.every(fullTimeWage));
+console.log("------------------");
+console.log("Daily Wage filter when part time wage is obtained");
+console.log(mapDayWithWages.some(partTimeWage));
+console.log("------------------");
+console.log("Finding total number of days worked");
+console.log("Total number of working days: "+empWageArray.reduce(totalWorkingDays,0));
+
+//Using map
+console.log("------------------");
+console.log("Employee Wage Map");
+console.log(empWageMap);
+console.log("------------------");
+console.log("Employee Hr Map");
+console.log(empHrMap);
+console.log("Total Employee Wage is, using Maps: "+Array.from(empWageMap.values()).reduce(totalWages,0));
+//Arrow Functions
+
+const findTotal=(totalVal,dailyVal)=> {return totalVal+ dailyVal;}
+let totalHrs=Array.from(empHrMap.values()).reduce(findTotal,0);
+let totalWage=Array.from(empWageMap.values()).filter(dailyWage=>dailyWage>0).reduce(findTotal,0);
+console.log("Total wage with arrows=> "+totalWage+" and hrs with arrow => "+totalHrs);
+
+console.log("Employee Wage and Hr object: "+empWageandHrMap);
+let totWages=empWageandHrMap.filter(daily=>daily.dailyWage>0).reduce((totalWage,dailywage)=> totalWage+=dailywage.dailyWage,0);
+let totalWorkingHrs=empWageandHrMap.filter(daily=>daily.dailyWage>0).reduce((totalWage,dailywage)=> totalWage+=dailywage.dailyHr,0);
+console.log("\n------------------");
+console.log("Employee Wage using objects : "+totWages);
+console.log("Employee Working hrs using objects : "+totalWorkingHrs);
+console.log("\n------------------");
+console.log("Full working days using Objects");
+empWageandHrMap.filter(dailyWage=>dailyWage.dailyHr==8).forEach(empWageandHrMap=>process.stdout.write(empWageandHrMap.toString()));
+console.log("\n------------------");
+console.log("Part-time working days using Objects");
+empWageandHrMap.filter(dailyWage=>dailyWage.dailyHr==4).forEach(empWageandHrMap=>process.stdout.write(empWageandHrMap.toString()));
+console.log("\n------------------");
+console.log("Non-working days");
+empWageandHrMap.filter(dailyWage=>dailyWage.dailyHr==0).forEach(empWageandHrMap=>process.stdout.write(empWageandHrMap.toString()));v
 // //hashmap
 // let keystring='a string';
 // let keyObj={};
